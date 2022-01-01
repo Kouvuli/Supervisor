@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21388888888888888" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/drawable/background_input.xml" value="0.21388888888888888" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/drawable/background_sign_in_btn.xml" value="0.14635416666666667" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/drawable/ic_edit_calendar.xml" value="0.20925925925925926" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21388888888888888" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/drawable/ic_plus.xml" value="0.125" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/layout/activity_edit_schedule.xml" value="0.2" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/layout/activity_key_log.xml" value="0.2" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/layout/activity_schedule_info.xml" value="0.176" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/layout/fragment_history.xml" value="0.144" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/layout/fragment_schedule.xml" value="0.152" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/layout/list_history_item.xml" value="0.264" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/layout/list_item.xml" value="0.264" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/layout/list_schedule_item.xml" value="0.13020833333333334" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/menu/main_menu.xml" value="0.2" />
+        <entry key="..\:/Hệ điều hành/bài nộp/Cuối kỳ/Android/Form/app/src/main/res/menu/option_menu.xml" value="0.264" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

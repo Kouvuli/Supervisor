@@ -1,0 +1,76 @@
+﻿<Window x:Class="SupervisorC.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupervisorC"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        Topmost="True"
+        TextOptions.TextRenderingMode="Auto"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStyle="None">
+    <Grid>
+        <materialDesign:Card Width="300" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="15 15 15 15"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid Margin="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" ></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" x:Name="hh" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Text=":"></TextBlock>
+                        <TextBlock Grid.Column="2"  x:Name="mm" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
+                        <TextBlock Grid.Column="3" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Text=":"></TextBlock>
+                        <TextBlock Grid.Column="4" x:Name="ss" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        
+                    </Grid>
+
+
+                </Grid>
+                <Grid Grid.Row="1">
+                    <PasswordBox
+                        x:Name="Password"
+                        Height="40"
+                        materialDesign:HintAssist.Hint="Mật khẩu"
+                        materialDesign:HintAssist.Foreground="Blue"
+                        materialDesign:TextFieldAssist.UnderlineBrush="Blue" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Button 
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        x:Name="loginBtn"
+                        Width="200"
+                        ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                        Background="AliceBlue"
+                        Click="Login_Click"
+                        Content="Đăng nhập"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingVertical="@dimen/_15sdp"
+    android:paddingHorizontal="@dimen/_15sdp"
+    android:orientation="vertical"
+    tools:context=".activities.ScheduleInfoActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/black"
+            android:background="@drawable/background_input"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Giờ bằng đầu"/>
+            <TextView
+                android:id="@+id/txt_start_time"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/_10sdp"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textColor="@color/black"
+                android:background="@drawable/background_input"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Giờ kết thúc"/>
+            <TextView
+                android:id="@+id/txt_end_time"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/_10sdp"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textColor="@color/black"
+                android:background="@drawable/background_input"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Thời gian ngắt"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_interrupt_time"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/black"
+            android:background="@drawable/background_input"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Thời gian tối đa sử dụng"
+            android:textColor="@color/black"
+
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_duration"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/black"
+            android:background="@drawable/background_input"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Thời gian tổng sử dụng"
+            android:textColor="@color/black"
+
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_sum_time"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/black"
+            android:background="@drawable/background_input"
+            />
+    </LinearLayout>
+</LinearLayout>

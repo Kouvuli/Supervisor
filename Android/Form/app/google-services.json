@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "31317232703",
+    "project_id": "supervisor-fa34d",
+    "storage_bucket": "supervisor-fa34d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31317232703:android:725509d531268bce62bc8a",
+        "android_client_info": {
+          "package_name": "com.example.SupervisorP"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31317232703-bpt32q59vsn42uvn8jtfbtfu4mgh13ai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg8c0Z5lveoqQQhzQz0cG0FjEeLxn_1g4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31317232703-bpt32q59vsn42uvn8jtfbtfu4mgh13ai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

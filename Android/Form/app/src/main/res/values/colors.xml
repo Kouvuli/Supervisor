@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_1">#13497B</color>
+    <color name="primary_2">#4CD5FF</color>
+    <color name="primary_3">#FF6666</color>
+    <color name="secondary_3">#FF8B66</color>
+    <color name="disable_icon_color">#9E9E9E</color>
+    <color name="disable_btn_color">#CECECE</color>
+    <color name="edt_text_background">#CECECE</color>
+    <color name="setting_background">#F9F7F7</color>
+    <color name="star_color">#FFDE69</color>
+    <color name="incoming_message">#FF2845</color>
+    <color name="producer_message">#BBEFFF</color>
+    <color name="consumer_message">#F3F1F1</color>
+    <color name="disable_tab_text_color">#C2C2C2</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="ic_active">#15D374</color>
+    <color name="ic_launcher_background">#3D72DC</color>
+    <color name="ic_liked_tint">#FF6666</color>
+    <color name="ic_message_tint">#4CD5FF</color>
+    <color name="ic_home_tint">#7F00FF</color>
+    <color name="avatarTint">#ECECEC</color>
+</resources>
