@@ -203,6 +203,7 @@ namespace SupervisorC
                 else
                 {
                     if (!timeEnd.Equals(nowSchedule.timeEnd)){
+                        timer.Stop();
                         double timeLeftDB = getRemainTime(nowSchedule);
                         timeLeft = (int)timeLeftDB;
                         timeEnd = nowSchedule.timeEnd;
