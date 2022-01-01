@@ -153,6 +153,7 @@ public class EditScheduleActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Tổng thời gian tối đa ít hơn thời gian tối da được sử dụng", Toast.LENGTH_SHORT).show();
                 return false;
             }
+
         }
         return true;
     }

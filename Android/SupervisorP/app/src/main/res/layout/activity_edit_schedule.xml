@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_input"
                 android:imeOptions="actionDone"
-                android:inputType="text" />
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_input"
                 android:imeOptions="actionDone"
-                android:inputType="text" />
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -162,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_input"
                 android:imeOptions="actionDone"
-                android:inputType="text" />
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>

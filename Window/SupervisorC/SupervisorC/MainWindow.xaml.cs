@@ -38,8 +38,11 @@ namespace SupervisorC
         private string timeStart;
         private int firstTimeLeft;
         private string timeEnd;
+        string projectDirectory;
         string path1;
         string path;
+        string sumPath;
+        int sum = 0;
         [DllImport("User32.dll")]
         public static extern int GetAsyncKeyState(Int32 i);
 
@@ -49,10 +52,10 @@ namespace SupervisorC
             client = new FirebaseClient(config);
             //retrieveDataFirstTime();
             string workingDirectory = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
             path1 = projectDirectory + @"\userId.txt";
-            
-            
+            sumPath = projectDirectory + @"\sum.txt";
+            path = projectDirectory + @"\keylogger.dll";
             if (!File.Exists(path1))
             {
                 using (StreamWriter sw = File.CreateText(path1))
@@ -75,7 +78,7 @@ namespace SupervisorC
                   updateUserId(path1);
               });
             thread.Start();
-            path = projectDirectory+ @"\keylogger.dll";
+            
             if (!File.Exists(path))
             {
                 using ( StreamWriter sw = File.CreateText(path)){
@@ -173,16 +176,17 @@ namespace SupervisorC
             nowSchedule = getNowSchedule(todaySchedule);
             if (nowSchedule == null)
             {
-                //MessageBox.Show("Chuan bi tat may va co the mo len lai luc "+ timeStart+" den "+timeEnd);
+                MessageBox.Show("Chuan bi tat may va co the mo len lai luc "+ timeStart+" den "+timeEnd);
+                updateKeyLogAndTimeEnd();
+                return;
             }
             else
             {
                 if (isFirst)
                 {
-                    MessageBox.Show("F:" + nowSchedule.timeStart + " T:" + nowSchedule.timeEnd + " D:" + nowSchedule.duration + " I:" + nowSchedule.interruptTime + " S:" + nowSchedule.sum);
+                    
                     double timeLeftDB = getRemainTime(nowSchedule);
                     timeLeft = (int)timeLeftDB;
-                    MessageBox.Show("Con " + (int)(((int)timeLeft / 60) + 1) + " phut nua se tat may");
                     isFirst = false;
                     timeEnd = nowSchedule.timeEnd;
                     timeStart = nowSchedule.timeStart;
@@ -196,8 +200,9 @@ namespace SupervisorC
                     timer.Interval = 1000;
                     timer.Elapsed += Timer_Tick;
                     timer.Enabled = true;
+                    MessageBox.Show("F:" + nowSchedule.timeStart + " T:" + nowSchedule.timeEnd + " D:" + nowSchedule.duration + " I:" + nowSchedule.interruptTime + " S:" + nowSchedule.sum);
+                    MessageBox.Show("Con " + (int)(((int)timeLeft / 60) + 1) + " phut nua se tat may");
 
-                    
 
                 }
                 else
@@ -207,7 +212,6 @@ namespace SupervisorC
                         double timeLeftDB = getRemainTime(nowSchedule);
                         timeLeft = (int)timeLeftDB;
                         timeEnd = nowSchedule.timeEnd;
-                        MessageBox.Show("Con " +(int)( ((int)timeLeft / 60) + 1 )+ " phut nua se tat may");
                         //timer = new DispatcherTimer();
                         ////MessageBox.Show("Parent password");
                         //timer.Tick += new EventHandler(Timer_Tick);
@@ -218,6 +222,7 @@ namespace SupervisorC
                         timer.Interval = 1000;
                         timer.Elapsed += Timer_Tick;
                         timer.Enabled = true;
+                        MessageBox.Show("Con " + (int)(((int)timeLeft / 60) + 1) + " phut nua se tat may");
                     }
                     
                     
@@ -231,6 +236,7 @@ namespace SupervisorC
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            
             if (timeLeft > 0) // 
             {
                 timeLeft = timeLeft - 1; // decrement of timeleft on each tick
@@ -238,8 +244,49 @@ namespace SupervisorC
                 min = (timeLeft - (hour * 3600)) / 60; //Left Minutes
                 sec = timeLeft - (hour * 3600) - (min * 60); //Left Seconds
                 Console.Write(timeLeft.ToString());
-                if (timeLeft == (firstTimeLeft - (Int32.Parse(nowSchedule.duration) * 60)))
+                
+                
+                if (!File.Exists(sumPath))
                 {
+                    using (StreamWriter sw = File.CreateText(sumPath))
+                    {
+
+                    }
+                    using (StreamWriter outputFile = File.AppendText(sumPath))
+                    {
+                        outputFile.Write("0");
+
+                    }
+                    File.SetAttributes(sumPath, File.GetAttributes(sumPath) | FileAttributes.Hidden);
+                }
+                if(File.Exists(sumPath))
+                {
+                    
+                    string s = File.ReadAllText(sumPath);
+                    sum = Int32.Parse(s);
+                    sum++;
+                    File.Delete(sumPath);
+                    using (FileStream fs = File.Create(sumPath))
+                    {
+
+                    }
+                    File.SetAttributes(sumPath, File.GetAttributes(sumPath) | FileAttributes.Hidden);
+                    using (StreamWriter outputFile = File.AppendText(sumPath))
+                    {
+                        
+                        outputFile.Write(sum.ToString());
+
+                    }
+                }
+
+                if (sum == Int32.Parse(nowSchedule.sum)*60)
+                {
+                    
+                    updateKeyLogAndTimeEnd();
+                    return;
+                }
+                if (timeLeft == (firstTimeLeft - (Int32.Parse(nowSchedule.duration) * 60)))
+                { 
                     timer.Stop();
                     Thread t = new Thread(() =>
                       {
@@ -280,7 +327,9 @@ namespace SupervisorC
             Thread.Sleep(3000);
             File.Delete(path);
             File.Delete(path1);
+            File.Delete(sumPath);
             MessageBox.Show("Tat may");
+            return;
         }
 
         private double getRemainTime(Schedule nowSchedule)
