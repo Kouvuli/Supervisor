@@ -374,8 +374,8 @@ namespace SupervisorC
         {
             List<Schedule> schedules=new List<Schedule>();
             List<string> ids = new List<string>();
-            string today = "16/12/2021";
-            //string today = DateTime.Now.ToString("dd/MM/yyyy");
+            //string today = "16/12/2021";
+            string today = DateTime.Now.ToString("dd/MM/yyyy");
             FirebaseResponse response1 = await client.GetAsync("Schedule");
             string a = response1.Body.ToString();
             a = a.Replace("\"", "");
@@ -391,14 +391,15 @@ namespace SupervisorC
                 Schedule temp = response.ResultAs<Schedule>();
                 schedules.Add(temp);
             }
-            for (int i = 0; i < schedules.Count; i++)
+            List<Schedule> newSche = new List<Schedule>();
+            foreach(Schedule sche in schedules)
             {
-                if (!schedules[i].date.Equals(today))
+                if (sche.date.Equals(today))
                 {
-                    schedules.RemoveAt(i);
+                    newSche.Add(sche);
                 }
             }
-            return schedules;
+            return newSche;
         }
         private Schedule getNowSchedule(List<Schedule> schedules)
         {

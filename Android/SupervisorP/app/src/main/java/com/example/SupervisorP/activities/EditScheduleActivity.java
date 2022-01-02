@@ -118,7 +118,7 @@ public class EditScheduleActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Thiếu dữ liệu nhập",Toast.LENGTH_LONG).show();
             return false;
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         try {
             timeEd = dateFormat.parse(binding.edtEdTime.getText().toString());
         } catch (ParseException e) {
@@ -166,9 +166,22 @@ public class EditScheduleActivity extends AppCompatActivity {
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    binding.edtEdTime.setText(hourOfDay + ":" + minute );
+                    if (hourOfDay<10 && minute>=10){
+                        binding.edtEdTime.setText("0" + hourOfDay + ":" + minute);
+
+                    }else if(hourOfDay>=10 && minute<10){
+                        binding.edtEdTime.setText( hourOfDay + ":" + "0"+minute);
+                    }
+                    else if(hourOfDay<10 && minute<10){
+                        binding.edtEdTime.setText( "0"+hourOfDay + ":" + "0"+minute);
+                    }
+                    else{
+
+                        binding.edtEdTime.setText(hourOfDay + ":" + minute );
+                    }
+
                     try {
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
                         timeEd = dateFormat.parse(binding.edtEdTime.getText().toString());
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -181,28 +194,41 @@ public class EditScheduleActivity extends AppCompatActivity {
         else{
             Calendar calendar=Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
             try {
                 timeEd = dateFormat.parse(schedule.getTimeEnd());
                 calendar.setTime(timeEd);
 
+
             } catch (ParseException e) {
             }
-            TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-
+            int hour=calendar.get(Calendar.HOUR_OF_DAY)-16;
+            int minute=calendar.get(Calendar.MINUTE);
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    binding.edtEdTime.setText(hourOfDay + ":" + minute );
+                    if (hourOfDay<10 && minute>=10){
+                        binding.edtEdTime.setText("0" + hourOfDay + ":" + minute);
+
+                    }else if(hourOfDay>=10 && minute<10){
+                        binding.edtEdTime.setText( hourOfDay + ":" + "0"+minute);
+                    }
+                    else if(hourOfDay<10 && minute<10){
+                        binding.edtEdTime.setText( "0"+hourOfDay + ":" + "0"+minute);
+                    }
+                    else{
+
+                        binding.edtEdTime.setText(hourOfDay + ":" + minute );
+                    }
+
                     try {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
                         timeEd = dateFormat.parse(binding.edtEdTime.getText().toString());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
-            };
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                    android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
-                    timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+            }, hour, minute, true);
             timePickerDialog.show();
         }
 
@@ -216,9 +242,21 @@ public class EditScheduleActivity extends AppCompatActivity {
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    binding.edtBgTime.setText(hourOfDay + ":" + minute );
+                    if (hourOfDay<10 && minute>=10){
+                        binding.edtBgTime.setText("0" + hourOfDay + ":" + minute);
+
+                    }else if(hourOfDay>=10 && minute<10){
+                        binding.edtBgTime.setText( hourOfDay + ":" + "0"+minute);
+                    }
+                    else if(hourOfDay<10 && minute<10){
+                        binding.edtBgTime.setText( "0"+hourOfDay + ":" + "0"+minute);
+                    }
+                    else{
+
+                        binding.edtBgTime.setText(hourOfDay + ":" + minute );
+                    }
                     try {
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
                         timeBg = dateFormat.parse(binding.edtBgTime.getText().toString());
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -231,29 +269,43 @@ public class EditScheduleActivity extends AppCompatActivity {
         else {
             Calendar calendar=Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
             try {
                 timeBg = dateFormat.parse(schedule.getTimeStart());
-                calendar.setTime(timeBg);
 
             } catch (ParseException e) {
             }
-            TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-
+            calendar.setTime(timeBg);
+//            int hour=timeBg.getHours();
+//            int minute=timeBg.getMinutes();
+            int hour=calendar.get(Calendar.HOUR_OF_DAY)-16;
+            int minute=calendar.get(Calendar.MINUTE);
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    binding.edtBgTime.setText(hourOfDay + ":" + minute );
+                    if (hourOfDay<10 && minute>=10){
+                        binding.edtBgTime.setText("0" + hourOfDay + ":" + minute);
+
+                    }else if(hourOfDay>=10 && minute<10){
+                        binding.edtBgTime.setText( hourOfDay + ":" + "0"+minute);
+                    }
+                    else if(hourOfDay<10 && minute<10){
+                        binding.edtBgTime.setText( "0"+hourOfDay + ":" + "0"+minute);
+                    }
+                    else{
+
+                        binding.edtBgTime.setText(hourOfDay + ":" + minute );
+                    }
                     try {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
                         timeBg = dateFormat.parse(binding.edtBgTime.getText().toString());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
-            };
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                    android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
-                    timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+            }, hour, minute, true);
             timePickerDialog.show();
+
         }
 
     }

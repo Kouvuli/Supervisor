@@ -8,11 +8,11 @@ namespace SupervisorC
 {
     class Schedule
     {
-        public string date;
-        public string duration;
-        public string interruptTime;
-        public string sum;
-        public string timeEnd;
-        public string timeStart;
+        public string date { get; set; }
+        public string duration { get; set; }
+        public string interruptTime { get; set; }
+        public string sum { get; set; }
+        public string timeEnd { get; set; }
+        public string timeStart { get; set; }
     }
 }

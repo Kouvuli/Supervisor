@@ -82,7 +82,7 @@ namespace SupervisorC
                 else
                 {
                     List<Schedule> todaySchedules = new List<Schedule>();
-                    await GetTodaySchedule(todaySchedules);
+                    todaySchedules=await GetTodaySchedule();
                     Schedule nowSchedule = getNowSchedule(todaySchedules);
                     if (nowSchedule == null)
                     {
@@ -157,11 +157,12 @@ namespace SupervisorC
             return (passChild, passParent);
         }
 
-        private async Task GetTodaySchedule(List<Schedule> schedules)
+        private async Task<List<Schedule>> GetTodaySchedule()
         {
+            List<Schedule> schedules = new List<Schedule>();
             List<string> ids = new List<string>();
-            string today = "16/12/2021";
-            //string today = DateTime.Now.ToString("dd/MM/yyyy");
+            //string today = "16/12/2021";
+            string today = DateTime.Now.ToString("dd/MM/yyyy");
             FirebaseResponse response1 = await client.GetAsync("Schedule");
             string a = response1.Body.ToString();
             a = a.Replace("\"", "");
@@ -171,21 +172,23 @@ namespace SupervisorC
             {
                 ids.Add(parts2[i].Substring(0, 20));
             }
-            foreach(string id in ids){
+            foreach (string id in ids)
+            {
                 FirebaseResponse response = await client.GetAsync("Schedule/" + id);
-                Schedule temp=response.ResultAs<Schedule>();
+                Schedule temp = response.ResultAs<Schedule>();
                 schedules.Add(temp);
             }
-            for (int i = 0; i < schedules.Count; i++)
+            List<Schedule> newSche = new List<Schedule>();
+            foreach (Schedule sche in schedules)
             {
-                if (!schedules[i].date.Equals(today))
+                if (sche.date.Equals(today))
                 {
-                    schedules.RemoveAt(i);
+                    newSche.Add(sche);
                 }
             }
-            
+            return newSche;
         }
-        
+
         private Schedule getNowSchedule(List<Schedule> schedules)
         {
             string time = DateTime.Now.ToString("HH:mm");
