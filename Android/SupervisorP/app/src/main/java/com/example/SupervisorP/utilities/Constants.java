@@ -10,6 +10,7 @@ public class Constants {
     public static final String KEY_ED_TIME="timeEnd";
     public static final String KEY_SUM_TIME="sum";
     public static final String KEY_INTERRUPT_TIME="interruptTime";
+    public static final String KEY_FLAG="flag";
 
     public static final String KEY_HISTORY_COLLECTION="History";
 }

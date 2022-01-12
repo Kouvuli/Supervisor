@@ -1,5 +1,6 @@
 package com.example.SupervisorP.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
@@ -14,8 +15,11 @@ import com.example.SupervisorP.databinding.ActivityEditScheduleBinding;
 import com.example.SupervisorP.firebase.ScheduleDBM;
 import com.example.SupervisorP.models.Schedule;
 import com.example.SupervisorP.utilities.Constants;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.firebase.database.DataSnapshot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -76,16 +80,17 @@ public class EditScheduleActivity extends AppCompatActivity {
                                 binding.edtBgTime.getText().toString(),
                                 binding.edtEdTime.getText().toString(),
                                 binding.edtInterruptTime.getText().toString(),
-                                binding.edtSum.getText().toString());
+                                binding.edtSum.getText().toString(),"0");
                         scheduleDBM.add(schedule_final).addOnSuccessListener(suc ->
                         {
-                            Toast.makeText(getApplicationContext(), "Inserted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                         }).addOnFailureListener(er ->
                         {
                             Toast.makeText(getApplicationContext(), "" + er.getMessage(), Toast.LENGTH_SHORT).show();
                         });
                     }
                     else {
+                        loading(true);
                         HashMap<String,Object> hashMap=new HashMap<>();
                         hashMap.put(Constants.KEY_DATE,schedule.getDate());
                         hashMap.put(Constants.KEY_BG_TIME,binding.edtBgTime.getText().toString());
@@ -93,13 +98,32 @@ public class EditScheduleActivity extends AppCompatActivity {
                         hashMap.put(Constants.KEY_DURATION,binding.edtDuration.getText().toString());
                         hashMap.put(Constants.KEY_SUM_TIME,binding.edtSum.getText().toString());
                         hashMap.put(Constants.KEY_INTERRUPT_TIME, binding.edtInterruptTime.getText().toString());
-                        scheduleDBM.update(schedule.getKey(),hashMap).addOnSuccessListener(suc ->
-                        {
-                            Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_LONG).show();
-                            finish();
-                        }).addOnFailureListener(er ->
-                        {
-                            Toast.makeText(getApplicationContext(), "" + er.getMessage(), Toast.LENGTH_SHORT).show();
+                        hashMap.put(Constants.KEY_FLAG,"1");
+                        scheduleDBM.getFlag(schedule.getKey()).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                            @Override
+                            public void onSuccess(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.getValue().equals("0")) {
+                                    loading(false);
+                                    scheduleDBM.update(schedule.getKey(), hashMap).addOnSuccessListener(suc ->
+                                    {
+                                        HashMap<String, Object> hm = new HashMap<>();
+                                        hm.put(Constants.KEY_FLAG, "0");
+                                        scheduleDBM.update(schedule.getKey(), hm);
+                                        Toast.makeText(getApplicationContext(), "Cập nhật thành công", Toast.LENGTH_LONG).show();
+                                        finish();
+                                    }).addOnFailureListener(er ->
+                                    {
+                                        Toast.makeText(getApplicationContext(), "" + er.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Dữ liệu đang được truy xuất", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         });
                     }
                     Intent back_intent=new Intent(EditScheduleActivity.this,MainActivity.class);
@@ -308,5 +332,15 @@ public class EditScheduleActivity extends AppCompatActivity {
 
         }
 
+    }
+    private void loading(boolean isLoad){
+        if (isLoad){
+            binding.progressBar.setVisibility(View.VISIBLE);
+            binding.confirmButton.setVisibility(View.INVISIBLE);
+        }
+        else{
+            binding.confirmButton.setVisibility(View.VISIBLE);
+            binding.progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 }

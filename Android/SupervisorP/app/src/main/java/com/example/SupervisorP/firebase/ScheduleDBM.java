@@ -1,7 +1,9 @@
 package com.example.SupervisorP.firebase;
 
 import com.example.SupervisorP.models.Schedule;
+import com.example.SupervisorP.utilities.Constants;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -39,8 +41,8 @@ public class ScheduleDBM {
         return databaseReference.orderByKey().startAfter(key).limitToFirst(8);
     }
 
-    public Query get()
+    public Task<DataSnapshot> getFlag(String key)
     {
-        return databaseReference.orderByKey();
+        return databaseReference.child(key).child(Constants.KEY_FLAG).get();
     }
 }

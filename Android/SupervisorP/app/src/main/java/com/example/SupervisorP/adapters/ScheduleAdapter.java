@@ -29,10 +29,11 @@ import java.util.Collection;
 public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable
 {
     private Context context;
-    ArrayList<Schedule> list = new ArrayList<>();
+    ArrayList<Schedule> list=  new ArrayList<>();
     ArrayList<Schedule> listAll = new ArrayList<>();
     public ScheduleAdapter(Context ctx)
     {
+        list.clear();
         this.context = ctx;
     }
     public void setItems(ArrayList<Schedule> schedules)

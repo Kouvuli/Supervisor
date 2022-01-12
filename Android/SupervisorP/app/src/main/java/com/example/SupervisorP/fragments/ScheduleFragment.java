@@ -123,7 +123,8 @@ public class ScheduleFragment extends Fragment {
                     String date=format1.format(calendar.getTime());
                     edtDate.setText(date);
                     main.dateSche=date;
-                    scheduleAdapter.getFilter().filter(edtDate.getText().toString());
+                    //scheduleAdapter.getFilter().filter(edtDate.getText().toString());
+                    loadData();
                 }
             });
         });
@@ -141,6 +142,7 @@ public class ScheduleFragment extends Fragment {
 
     public void loadData() {
         swipeRefreshLayout.setRefreshing(true);
+        scheduleAdapter.getFilter().filter(edtDate.getText().toString());
         scheduleDBM.get(key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -153,9 +155,10 @@ public class ScheduleFragment extends Fragment {
                 }
                 scheduleAdapter.setItems(schedules);
                 scheduleAdapter.notifyDataSetChanged();
+
                 isLoading=false;
                 swipeRefreshLayout.setRefreshing(false);
-                scheduleAdapter.getFilter().filter(edtDate.getText().toString());
+
             }
 
             @Override

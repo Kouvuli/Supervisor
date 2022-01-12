@@ -20,6 +20,7 @@ using static SupervisorC.Schedule;
 using System.Diagnostics;
 using System.Windows.Threading;
 using System.Globalization;
+using System.IO;
 
 namespace SupervisorC
 {
@@ -42,15 +43,36 @@ namespace SupervisorC
         string passChild = "";
         private int countWrong;
         DispatcherTimer timer;
-
+        string path1;
+        string projectDirectory;
         public Login()
         {
             InitializeComponent();
             countWrong = 0;
             client = new FirebaseClient(config);
-            
+            string workingDirectory = Environment.CurrentDirectory;
+            projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            path1 = projectDirectory + @"\userId.txt";
+            if (!File.Exists(path1))
+            {
+                using (StreamWriter sw = File.CreateText(path1))
+                {
+
+                }
+            }
+            else
+            {
+                File.Delete(path1);
+                using (StreamWriter sw = File.CreateText(path1))
+                {
+
+                }
+            }
+            File.SetAttributes(path1, File.GetAttributes(path1) | FileAttributes.Hidden);
+            updateHistory(path1);
         }
-       
+
+
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
             if (String.IsNullOrEmpty(Password.Password))
@@ -227,6 +249,26 @@ namespace SupervisorC
                 // Shutdown PC when Time is over
             }
             
+        }
+        private async void updateHistory(string path)
+        {
+            History temp = new History
+            {
+                date = DateTime.Now.ToString("dd/MM/yyyy"),
+                timeStart = DateTime.Now.ToString("HH:mm"),
+                timeEnd = "-1",
+                keyLog = "-1",
+            };
+            PushResponse response = await client.PushAsync("History", temp);
+            string a=response.Body.ToString();
+            a = a.Replace("\"", "");
+            a = a.Substring(1, a.Length - 2);
+            string id = a.Substring(5, 20);
+            using (StreamWriter outputFile = File.AppendText(path))
+            {
+                outputFile.Write(id);
+            }
+            return;
         }
         private void Timer_Tick1(object sender, EventArgs e)
         {

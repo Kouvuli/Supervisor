@@ -13,17 +13,26 @@ public class Schedule implements Serializable {
     private String timeEnd;
     private String interruptTime;
     private String sum;
-    public Schedule(){}
+    private String flag;
 
-    public Schedule(String date, String duration, String timeStart, String timeEnd, String interruptTime, String sum) {
+    public Schedule(String date, String duration, String timeStart, String timeEnd, String interruptTime, String sum, String flag) {
         this.date = date;
         this.duration = duration;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.interruptTime = interruptTime;
         this.sum = sum;
+        this.flag = flag;
     }
 
+    public Schedule(){}
+
+    public String getFlag() {
+        return flag;
+    }
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
     public void setKey(String key) {
         this.key = key;
     }
