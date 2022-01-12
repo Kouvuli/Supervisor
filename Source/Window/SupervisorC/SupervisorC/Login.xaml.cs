@@ -99,6 +99,7 @@ namespace SupervisorC
                     timeLeft = 7;
                     timer.Start();
                     loginBtn.IsEnabled = false;
+                    this.Visibility=Visibility.Hidden;
                     //wait 60min 
                 }
                 else
@@ -244,6 +245,7 @@ namespace SupervisorC
             else
             {
                 timer.Stop(); // Stop Timer
+                this.Visibility=Visibility.Visible;
                 loginBtn.IsEnabled = true;              /* Process.Start("shutdown", "/s /t 0");*/
                 //MessageBox.Show("Tat may");
                 // Shutdown PC when Time is over
@@ -287,6 +289,7 @@ namespace SupervisorC
                     if (Password.Password.ToString() == passParent)
                     {
                         timer.Stop();
+                
                         return;
                     }
                 }
